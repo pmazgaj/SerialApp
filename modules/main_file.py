@@ -11,7 +11,7 @@ import pandas as pd
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 
 from modules import serial_port_handler as ser_mod
-from modules.menu import *
+from modules.GUI.menu import *
 from settings_files.program_settings import *
 
 

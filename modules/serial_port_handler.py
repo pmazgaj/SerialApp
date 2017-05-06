@@ -5,48 +5,40 @@ Module used to receive data from serial port
 import glob
 import time
 import tkinter as tk
-from threading import Thread
 from tkinter import StringVar, ttk
-
 import serial
 from pylab import *
+from settings_files.program_settings import SERIAL_PORT_SETTINGS
 
-from settings_files.program_settings import *
 
-class SerialData(object):
-    file_path = os.path.join(os.path.dirname(__file__), 'log.txt')
-    file_exists(file_path)
+class SerialData:
+    com_number = SERIAL_PORT_SETTINGS['port']
+    baudrate = SERIAL_PORT_SETTINGS['baudrate']
+    bytesize = SERIAL_PORT_SETTINGS['bytesize']
+    parity = SERIAL_PORT_SETTINGS['parity']
+    stopbits = SERIAL_PORT_SETTINGS['stopbits']
+    timeout = SERIAL_PORT_SETTINGS['timeout']
+    xonxoff = SERIAL_PORT_SETTINGS['xonxoff']
+    rtscts = SERIAL_PORT_SETTINGS['rtscts']
+    interCharTimeout = SERIAL_PORT_SETTINGS['interCharTimeout']
 
-    COMNUM = 7
-    group = []
-    baudrate1 = 115200
-    data_bits = 8
-    result = []
-    popup =
-
-    def __init__(self, init=50):
+    def __init__(self):
         try:
-            self.ser = ser = serial.Serial(
-                port=self.COMNUM - 1,
-                baudrate=9600,
-                bytesize=serial.EIGHTBITS,
-                parity=serial.PARITY_NONE,
-                stopbits=serial.STOPBITS_ONE,
-                timeout=0.1,
-                xonxoff=0,
-                rtscts=0,
-                interCharTimeout=None
-            )
-
-            Thread(target=receiving, args=(self.ser,)).start()  # thread
-
-            popup_msg("Port has been opened!")
+            self.ser = ser = serial.Serial(port=self.com_number - 1,
+                                           baudrate=self.baudrate,
+                                           bytesize=serial.EIGHTBITS,
+                                           parity=serial.PARITY_NONE,
+                                           stopbits=serial.STOPBITS_ONE,
+                                           timeout=0.1,
+                                           xonxoff=0,
+                                           rtscts=0,
+                                           interCharTimeout=None
+                                           )
 
         except serial.serialutil.SerialException:
 
             # no serial connection
             self.ser = None
-            popup_msg("An error occurred ! Port was not opened !")
         else:
             pass
 
@@ -66,13 +58,16 @@ class SerialData(object):
         return 0.
 
     def __del__(self):
+        """Close serial port connection (if opened)"""
         if self.ser:
             self.ser.close()
 
-    def ports_available(self):
+    @staticmethod
+    def ports_available():
         """Check available ports on platform (for opening connection purposes)"""
+        result = []
         if sys.platform.startswith('win'):
-            ports = ['COM' + str(i + 1) for i in range(256)]
+            ports = ['COM{}'.format(i + 1) for i in range(0, 256)]
 
         elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
             # this is to exclude your current terminal "/dev/tty"
@@ -88,118 +83,21 @@ class SerialData(object):
             try:
                 s = serial.Serial(port)
                 s.close()
-                self.result.append(port)
+                result.append(port)
             except (OSError, serial.SerialException):
                 pass
-        return self.result
-
-    def set_port_spec(self):
-        try:
-            self.ports_available()
-        except ImportError:
-            # self.popup_msg("Error while importing function")
-        window_set_port = tk.Tk()
-        path_ico = os.path.join(os.path.dirname(__file__), 'set_ico.ico')
-        window_set_port.iconbitmap(default=path_ico)
-        window_set_port.wm_title("Configuration window")
-        window_set_port.geometry("240x320")
-
-        label = ttk.Label(window_set_port, text="Wybor portu: ")
-        label.pack(side="top", pady=10)
-
-        var_ = StringVar()
-        var2 = StringVar()
-        var3 = StringVar()
-        var4 = StringVar()
-        var5 = StringVar()
-        var6 = StringVar()
-
-        combobox = ttk.Combobox(window_set_port, textvariable=var_)
-        combobox.config(values=self.result)
-        combobox.pack(side="top", pady=0)
-
-        label = ttk.Label(window_set_port, text="Predkosc BAUD: ")
-        label.pack(side="top", pady=0)
-
-        combobox1 = ttk.Combobox(window_set_port, textvariable=var2)
-        combobox1.config(values=(50, 75, 110, 134, 150,
-                                 200, 300, 600, 1200,
-                                 1800, 2400, 4800, 9600, 19200,
-                                 38400, 57600, 115200))
-        combobox1.pack(side="top", pady=0)
-
-        label = ttk.Label(window_set_port, text="Data Bits: ")
-        label.pack(side="top", pady=0)
-
-        combobox2 = ttk.Combobox(window_set_port, textvariable=var3)
-        combobox2.config(values=(5, 6, 7, 8))
-
-        combobox2.pack(side="top", pady=0)
-
-        label = ttk.Label(window_set_port, text="Parity : ")
-        label.pack(side="top", pady=0)
-
-        combobox3 = ttk.Combobox(window_set_port, textvariable=var4)
-        combobox3.config(values=('None', 'Odd', 'Even', 'Mark', 'Space'))
-        combobox3.pack(side="top", pady=0)
-
-        label = ttk.Label(window_set_port, text="Stop Bits: ")
-        label.pack(side="top", pady=0)
-
-        combobox4 = ttk.Combobox(window_set_port, textvariable=var5)
-        combobox4.config(values=(1, 1.5, 2))
-        combobox4.pack(side="top", pady=0)
-
-        label = ttk.Label(window_set_port, text="Flow control: ")
-        label.pack(side="top", pady=0)
-
-        combobox5 = ttk.Combobox(window_set_port, textvariable=var6)
-        combobox5.config(values=('XON', 'X_OFF'))
-        combobox5.pack(side="top", pady=0)
-
-        def change_port_data():
-
-            b_r = combobox1.get()
-            c_n = combobox.get()
-            d_b = combobox2.get()
-            p_ = combobox3.get()
-            s_b = combobox4.get()
-            f_c = combobox5.get()
-
-            self.baudrate1 = ''.join(x for x in b_r if x.isdigit())
-            self.COMNUM = ''.join(x for x in c_n if x.isdigit())
-            self.data_bits = ''.join(x for x in d_b if x.isdigit())
-            self.parity = ''.join(x for x in p_)
-            self.stop_bits = ''.join(x for x in s_b if x.isdigit())
-            self.flow_control = ''.join(x for x in f_c)
-
-            self.group.append(self.baudrate1)
-            self.group.append(self.COMNUM)
-            self.group.append(self.data_bits)
-            self.group.append(self.parity)
-            self.group.append(self.stop_bits)
-            self.group.append(self.flow_control)
-
-            print("Ustawiono : {}".format(self.group))
-
-            print("Otworzono port {}".format(c_n))
-
-            window_set_port.destroy()
-
-        button1 = ttk.Button(window_set_port, text="Ustaw",
-                             command=lambda: change_port_data())  # podajemy parametr i zapętlamy
-        button1.pack()
+        return result
 
 
+    def start_stop(self, is_stopped):
+        """If visualising stopped refresh, else do None"""
+        if is_stopped:
+            return True
+        else:
+            return False
 
-
-def start_stop(works_t_f):
-    if works_t_f == 'startuj':
-        popup_msg('Odświeżanie danych zostało wznowione')
-
-    elif works_t_f == 'stopuj':
-        popup_msg('Odświeżanie danych zostało wstrzymane')
-
+    def stop(self, is_stopped):
+        if
 
 def receiving(ser):
     global last_received
@@ -217,4 +115,3 @@ def receiving(ser):
             open_file()
         else:
             pass
-

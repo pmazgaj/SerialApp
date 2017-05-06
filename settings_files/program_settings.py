@@ -3,10 +3,11 @@ import matplotlib.pyplot as plt
 from matplotlib import style
 from utils.import_settings import *
 
-SERIAL_PORT_SETTINGS = get_settings('[SERIAL_PORT] settings.ini', 'SerialPort', 'port')
+SERIAL_PORT_SETTINGS = get_config_for_one_section('[SERIAL_PORT] settings.ini', 'SerialPort')
+
 
 print(SERIAL_PORT_SETTINGS)
-MENU_SETTINGS = get_settings('[SETTINGS_MENU] menu.ini', 'MainWindow', 'iconbitmap')
+# MENU_SETTINGS = get_settings('[SETTINGS_MENU] menu.ini', 'MainWindow', 'iconbitmap')
 
 matplotlib.use('TkAgg')
 matplotlib.rcParams.update({'font.size': 9})  # fonts setting
