@@ -4,8 +4,6 @@ Module used to receive data from serial port
 
 import glob
 import time
-import tkinter as tk
-from tkinter import StringVar, ttk
 import serial
 from pylab import *
 from settings_files.program_settings import SERIAL_PORT_SETTINGS
@@ -20,27 +18,33 @@ class SerialData:
     timeout = SERIAL_PORT_SETTINGS['timeout']
     xonxoff = SERIAL_PORT_SETTINGS['xonxoff']
     rtscts = SERIAL_PORT_SETTINGS['rtscts']
-    interCharTimeout = SERIAL_PORT_SETTINGS['interCharTimeout']
+    interCharTimeout = SERIAL_PORT_SETTINGS['inter_char_timeout']
+    port = ''
+    # def __init__(self):
+    #     try:
+    #         self.ser = ser = serial.Serial(port=self.com_number - 1,
+    #                                        baudrate=self.baudrate,
+    #                                        bytesize=serial.EIGHTBITS,
+    #                                        parity=serial.PARITY_NONE,
+    #                                        stopbits=serial.STOPBITS_ONE,
+    #                                        timeout=0.1,
+    #                                        xonxoff=0,
+    #                                        rtscts=0,
+    #                                        interCharTimeout=None
+    #                                        )
+    #
+    #     except serial.serialutil.SerialException:
+    #
+    #         # no serial connection
+    #         self.ser = None
+    #     else:
+    #         pass
+    ser = None
 
-    def __init__(self):
-        try:
-            self.ser = ser = serial.Serial(port=self.com_number - 1,
-                                           baudrate=self.baudrate,
-                                           bytesize=serial.EIGHTBITS,
-                                           parity=serial.PARITY_NONE,
-                                           stopbits=serial.STOPBITS_ONE,
-                                           timeout=0.1,
-                                           xonxoff=0,
-                                           rtscts=0,
-                                           interCharTimeout=None
-                                           )
-
-        except serial.serialutil.SerialException:
-
-            # no serial connection
-            self.ser = None
-        else:
-            pass
+    def __del__(self):
+        """Close serial port connection (if opened)"""
+        if self.ser:
+            self.ser.close()
 
     def next(self):
         if not self.ser:
@@ -57,16 +61,12 @@ class SerialData:
             time.sleep(.001)
         return 0.
 
-    def __del__(self):
-        """Close serial port connection (if opened)"""
-        if self.ser:
-            self.ser.close()
-
     @staticmethod
     def ports_available():
         """Check available ports on platform (for opening connection purposes)"""
         result = []
         if sys.platform.startswith('win'):
+            print('Your platform is windows')
             ports = ['COM{}'.format(i + 1) for i in range(0, 256)]
 
         elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
@@ -88,30 +88,38 @@ class SerialData:
                 pass
         return result
 
-
-    def start_stop(self, is_stopped):
+    @staticmethod
+    def start(is_stopped):
         """If visualising stopped refresh, else do None"""
         if is_stopped:
             return True
         else:
             return False
 
-    def stop(self, is_stopped):
-        if
-
-def receiving(ser):
-    global last_received
-    global bytes
-    global data
-    global data_count
-    data_count = 0
-    while True:
-
-        bytes = ser.readline()  # Read from Serial Port
-        data = bytes.decode("utf-8")  # dlugosc linii do odczytu danych = 36
-        if len(data) > 35:
-            timer()
-            data_count += 1
-            open_file()
+    @staticmethod
+    def stop(is_stopped):
+        if not is_stopped:
+            return True
         else:
-            pass
+            return False
+
+    @staticmethod
+    def receiving(ser):
+        data_count = 0
+        while True:
+
+            line_to_decode = ser.readline()  # Read from Serial Port
+            data = line_to_decode.decode("utf-8")  # dlugosc linii do odczytu danych = 36
+            if len(data) > 35:
+                data_count += 1
+            else:
+                pass
+
+    def __str__(self):
+        return "Created serial port: {} on {}\nBaudrate: {}\nBytesize: {}\nStopbits: {}"\
+            .format(self.port, self.port, self.port, self.port, self.port)
+
+serial_port_test = SerialData()
+a = serial_port_test.ports_available()
+
+print(a)
