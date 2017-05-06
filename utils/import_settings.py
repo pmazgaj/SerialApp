@@ -1,24 +1,20 @@
 """
-Module to import settings from ini file
+Module to import program settings from ini file
 """
 import configparser
-from settings_files.program_settings import *
+from settings_files.program_paths import *
 
 __author__ = "Przemek"
 
 
-def get_settings(settings_file, section, param):
-    full_path = FOLDER_SETTINGS_INI + "\\" + settings_file
-
+def get_settings(file_path, section, param):
+    """Open .*.ini files, and get sections for those"""
+    full_path = FOLDER_SETTINGS_INI + "\\" + file_path
+    print(full_path)
     settings = configparser.ConfigParser()
     settings._interpolation = configparser.ExtendedInterpolation()
     settings.read(full_path)
 
-    # print(a)
     settings.sections()
 
     return settings.get(section, param)
-
-
-a = get_settings('[SETTINGS_MENU] menu.ini', 'MainWindow', 'iconbitmap')
-print(a)

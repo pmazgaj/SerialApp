@@ -1,13 +1,11 @@
-import tkinter as tk
+"""
+Module creating main menu
+"""
 
-from modules import main_file as m_file
+from PyQt5 import QtCore, QtGui, QtWidgets
 
-# from main_file import HomePage, StartPage
+__author__ = "Przemek"
 
-__author__ = 'Przemek'
-
-with open(os.path.join(here, 'README.txt')) as f:
-print(os.path.join(here, 'README.txt')) )
 
 class BuildMenu(tk.Menu):
     def __init__(self, *args, **kwargs):

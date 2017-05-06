@@ -1,5 +1,11 @@
+"""
+Module handling popups
+"""
+
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
+
+__author__ = "Przemek"
 
 
 class Window(QtWidgets.QMainWindow, GUI.MainUI.Ui_MainWindow):
@@ -9,16 +15,16 @@ class Window(QtWidgets.QMainWindow, GUI.MainUI.Ui_MainWindow):
         self.setWindowTitle("PyQT tuts!")
         self.setWindowIcon(QtGui.QIcon('pythonlogo.png'))
 
-        extractAction = QtGui.QAction("&GET TO THE CHOPPAH!!!", self)
-        extractAction.setShortcut("Ctrl+Q")
-        extractAction.setStatusTip('Leave The App')
-        extractAction.triggered.connect(self.close_application)
+        extract_action = QtGui.QAction("&GET TO THE CHOPPAH!!!", self)
+        extract_action.setShortcut("Ctrl+Q")
+        extract_action.setStatusTip('Leave The App')
+        extract_action.triggered.connect(self.close_application)
 
         self.statusBar()
 
-        mainMenu = self.menuBar()
-        fileMenu = mainMenu.addMenu('&File')
-        fileMenu.addAction(extractAction)
+        main_menu = self.menuBar()
+        file_menu = main_menu.addMenu('&File')
+        file_menu.addAction(extract_action)
 
         self.home()
 
@@ -34,9 +40,9 @@ class Window(QtWidgets.QMainWindow, GUI.MainUI.Ui_MainWindow):
         self.toolBar = self.addToolBar("Extraction")
         self.toolBar.addAction(extractAction)
 
-        checkBox = QtGui.QCheckBox('Enlarge Window', self)
-        checkBox.move(100, 25)
-        checkBox.stateChanged.connect(self.enlarge_window)
+        check_box = QtGui.QCheckBox('Enlarge Window', self)
+        check_box.move(100, 25)
+        check_box.stateChanged.connect(self.enlarge_window)
         # depending on what you want the default to be.
         # checkBox.toggle()
         self.show()
@@ -60,7 +66,7 @@ class Window(QtWidgets.QMainWindow, GUI.MainUI.Ui_MainWindow):
 
 def run():
     app = QtGui.QApplication(sys.argv)
-    GUI = Window()
+    gui = Window()
     sys.exit(app.exec_())
 
 

@@ -1,17 +1,17 @@
-import os
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib import style
+from utils.import_settings import *
 
-# paths used in project
-FOLDER_PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
-FOLDER_ASSETS_ICONS = os.path.join(FOLDER_PROJECT_PATH, 'assets', 'icons')
-FOLDER_SETTINGS_INI = os.path.join(FOLDER_PROJECT_PATH, 'ini', 'menus')
+SERIAL_PORT_SETTINGS = get_settings('[SERIAL_PORT] settings.ini', 'SerialPort', 'port')
+
+print(SERIAL_PORT_SETTINGS)
+MENU_SETTINGS = get_settings('[SETTINGS_MENU] menu.ini', 'MainWindow', 'iconbitmap')
 
 matplotlib.use('TkAgg')
 matplotlib.rcParams.update({'font.size': 9})  # fonts setting
 
-PICKED_CHOICE = 'arduino'
+PICKED_CHOICE = None
 PERIOD = 2
 MULTIPLIER = 2
 
