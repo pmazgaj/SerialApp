@@ -1,5 +1,6 @@
 import tkinter as tk
-import main_file as m_file
+
+from modules import main_file as m_file
 
 # from main_file import HomePage, StartPage
 

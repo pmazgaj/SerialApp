@@ -1,8 +1,8 @@
 import sys
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Window(QtGui.QMainWindow):
+class Window(QtWidgets.QMainWindow, GUI.MainUI.Ui_MainWindow):
     def __init__(self):
         super(Window, self).__init__()
         self.setGeometry(50, 50, 500, 300)

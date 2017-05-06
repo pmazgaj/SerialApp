@@ -18,11 +18,9 @@ from settings_files.program_settings import *
 
 def start_stop(works_t_f):
     if works_t_f == 'startuj':
-        IS_REFRESHING = True
         popup_msg('Odświeżanie danych zostało wznowione')
 
     elif works_t_f == 'stopuj':
-        IS_REFRESHING = False
         popup_msg('Odświeżanie danych zostało wstrzymane')
 
 

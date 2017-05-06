@@ -2,18 +2,16 @@
 # -*- coding: utf-8 -*-
 # -*- Encoding: utf-8 -*-
 import json
-import os
 import urllib.request
 
 import matplotlib.animation as animation_plt
-import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import numpy as np
 import pandas as pd
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 
-import modul_serial as ser_mod
-from menu import *
+from modules import serial_port_handler as ser_mod
+from modules.menu import *
 from settings_files.program_settings import *
 
 

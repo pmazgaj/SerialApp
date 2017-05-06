@@ -1,19 +1,12 @@
 import os
-import sys
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib import style
-
 
 # paths used in project
 FOLDER_PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 FOLDER_ASSETS_ICONS = os.path.join(FOLDER_PROJECT_PATH, 'assets', 'icons')
 FOLDER_SETTINGS_INI = os.path.join(FOLDER_PROJECT_PATH, 'ini', 'menus')
-
-
-# print(FOLDER_PROJECT_PATH)
-# print(FOLDER_ASSETS_ICONS)
-# print(FOLDER_SETTINGS_INI)
 
 matplotlib.use('TkAgg')
 matplotlib.rcParams.update({'font.size': 9})  # fonts setting
@@ -50,7 +43,6 @@ THIRD_COLOR_CHOSEN = 'r'
 FOURTH_COLOR_CHOSEN = 'r'
 FIFTH_COLOR_CHOSEN = 'r'
 
-
 BACKGROUND_STYLE = style.use('grayscale')  # default - dark_background on
 
 BACKGROUND_COLOR = 'white'  # default background color
@@ -66,6 +58,4 @@ LAST_RECEIVED = ''
 
 IS_REFRESHING = True
 
-
 AUTORS_RECAP = "Przemyslaw Mazgaj\n\t\t\t\t\tPolitechnika Krakowska\n\t\t\t\t\tInformatyka Stosowana"
-
