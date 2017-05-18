@@ -1,7 +1,8 @@
 """
 Create gui for setting serial port
 """
-
+import tkinter as tk
+import os
 __author__ = "Przemek"
 
 
@@ -10,7 +11,7 @@ class SerialGui:
         try:
             self.ports_available()
         except ImportError:
-        # self.popup_msg("Error while importing function")
+            pass
         window_set_port = tk.Tk()
         path_ico = os.path.join(os.path.dirname(__file__), 'set_ico.ico')
         window_set_port.iconbitmap(default=path_ico)
@@ -102,3 +103,5 @@ class SerialGui:
         button1 = ttk.Button(window_set_port, text="Ustaw",
                              command=lambda: change_port_data())  # podajemy parametr i zapętlamy
         button1.pack()
+
+SerialGui()

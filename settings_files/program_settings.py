@@ -1,3 +1,7 @@
+"""
+Global settings for entire program
+"""
+
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib import style
@@ -59,4 +63,4 @@ LAST_RECEIVED = ''
 
 IS_REFRESHING = True
 
-AUTORS_RECAP = "Przemyslaw Mazgaj\n\t\t\t\t\tPolitechnika Krakowska\n\t\t\t\t\tInformatyka Stosowana"
+AUTORS_RECAP = "Przemyslaw Mazgaj\n\t\t\t\t\tPython Developer\n\t\t\t\t\tSelf employed"
