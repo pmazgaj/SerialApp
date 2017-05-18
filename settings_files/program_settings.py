@@ -1,11 +1,12 @@
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib import style
-from utils.import_settings import *
+from SerialApp.utils.import_settings import get_section_or_param
 
-SERIAL_PORT_SETTINGS = get_config_for_one_section('[SERIAL_PORT] settings.ini', 'SerialPort')
-
+# SERIAL_PORT_SETTINGS = get_section_or_param('[SERIAL_PORT] settings.ini', 'SerialPort')
+# SERIAL_PORT_BYTESIZE = get_section_or_param('[SERIAL_PORT] settings.ini', 'SerialPort', 'baudrate')
 # print(SERIAL_PORT_SETTINGS)
+# print(SERIAL_PORT_BYTESIZE)
 # MENU_SETTINGS = get_settings('[SETTINGS_MENU] menu.ini', 'MainWindow', 'iconbitmap')
 
 matplotlib.use('TkAgg')
