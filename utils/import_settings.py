@@ -3,7 +3,8 @@ Module to import program settings from ini file
 """
 import configparser
 import os
-from SerialApp.settings_files.program_paths import FOLDER_SETTINGS_INI
+
+from SerialApp.program_paths import FOLDER_SETTINGS_INI
 
 __author__ = "Przemek"
 
@@ -14,7 +15,9 @@ def get_config_for_all_sections(file_path: str) -> dict:
     :param file_path: exact path for file
     :return:
     """
-    all_sections = dict()
+    if file_path is None:
+        return {}
+    all_sections = {}
 
     full_path = os.path.join(FOLDER_SETTINGS_INI, file_path)
     config = configparser.ConfigParser()
