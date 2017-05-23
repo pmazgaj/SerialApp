@@ -2,7 +2,10 @@
 Main module - handle everything from outside classes
 """
 import tkinter as tk
+import os
 from SerialApp.modules.GUI.pages import StartPage, PageOne, PageTwo
+from SerialApp.modules.GUI.serial_port_pages import PageChangeSerialPort, PageConfigSerialPort
+from SerialApp.program_paths import FOLDER_ASSETS_ICONS
 
 
 class MainApplication(tk.Tk):
@@ -10,6 +13,13 @@ class MainApplication(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+
+        iconbitmap = os.path.join(FOLDER_ASSETS_ICONS, 'ikona_orange.bmp')
+        print(iconbitmap)
+        tk.Tk.wm_title(self, string="SerialApps")
+
+        tk.Tk.iconbitmap(self, default=iconbitmap)
+
         container = tk.Frame(self)
 
         container.pack(side='top', fill='both', expand=True)
@@ -27,7 +37,7 @@ class MainApplication(tk.Tk):
         :param container:
         :return:
         """
-        for f_frame in (StartPage, PageOne, PageTwo):
+        for f_frame in (StartPage, PageOne, PageTwo, PageChangeSerialPort, PageConfigSerialPort):
             frame = f_frame(container, self)
             self.frames[f_frame] = frame
             frame.grid(row=0, column=0, sticky='nsew')
