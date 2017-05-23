@@ -69,5 +69,5 @@ class PageTwo(tk.Frame):
         toolbar = NavigationToolbar2TkAgg(canvas, self)
         toolbar.update()
 
-        canvas.get_tk_canvas().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+        canvas._tkcanvas.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
         canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)

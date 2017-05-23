@@ -181,15 +181,10 @@ def set_lines_color(color):
 
 def set_period(what_to_use):  # filtering axis y
     filter_range = tk.Tk()
-    if what_to_use == "SMA":
-        filter_range.wm_title('Set PERIOD for SMA')
-        label = ttk.Label(filter_range, text='SMA PERIOD')
-
-    elif what_to_use == "Multiplier":
-        filter_range.wm_title('Set MULTIPLIER')
-        label = ttk.Label(filter_range, text='Multiplier')
-
-    label.pack(side='top', fill='x', pady=10)
+    if what_to_use in ("SMA", "Multiplier"):
+        filter_range.wm_title('Set {}'.format(what_to_use))
+        label = ttk.Label(filter_range, text=what_to_use)
+        label.pack(side='top', fill='x', pady=10)
 
     e = ttk.Entry(filter_range)
 
