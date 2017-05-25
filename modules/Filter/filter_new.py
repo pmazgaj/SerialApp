@@ -93,5 +93,37 @@ class FilterUniqueValues(Filter):
         data_set = list(zip(*self.data_set))
         return data_set
 
+
+class FilterAverageValue(Filter):
+    """Filter with average value"""
+    def __init__(self, data_set: list = ()):
+        super(FilterAverageValue, self).__init__()
+        self.data_set = MergeLists(data_set).data_set
+        self.data_set = self.calculate()
+        self.empty_data = []
+
+    def calculate(self):
+        for index, data in enumerate(self.data_set):
+            if isinstance(self.data_set[0], tuple):
+                # self.empty_data.append(sum(data) / len(data))
+                print(data)
+        print(self.data_set)
+        # print(self.data_set)
+        # return data_set
+
+
+class MergeLists:
+    def __init__(self, data_set: list = ()):
+        self.data_set = data_set
+        self.data_set = self.calculate()
+
+    def calculate(self):
+        """Return list of list (merged) if first data_set[0] is list, else return original value"""
+        if isinstance(self.data_set[0], list):
+            return list(zip(*self.data_set))
+        return self.data_set
+
     def __str__(self):
-        return '{}'.format(self.data_set)
+        return "{}".format(self.data_set)
+
+
