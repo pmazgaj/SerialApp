@@ -2,11 +2,13 @@
 Define all pages for the application.
 """
 import tkinter as tk
-import matplotlib
 from tkinter import ttk
+
+import matplotlib
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.figure import Figure
-from SerialApp.settings_files.program_settings import LARGE_FONT
+
+from SerialApp.conf.program_settings import LARGE_FONT
 
 matplotlib.use("TkAgg")
 

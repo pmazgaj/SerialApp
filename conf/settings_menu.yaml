@@ -1,83 +1,82 @@
-[MainWindow]
+MainWindow:
     iconbitmap: ikona_orange.ico
-    title: 'main window'
+    title: main window
 
-[TkMenuBar]
+TkMenuBar:
     tearoff: 0
     label: Save log with raw data...
     command:
     menu: menu_file
 
-[TkMenuChangeFrequency]
+TkMenuChangeFrequency:
     tearoff: 1
 
-[TkMenuLineColor]
-    label: 'Zmien kolor linii'
+TkMenuLineColor:
+    label: Zmien kolor linii
     tearoff: 1
 
-[TkPortMenu]
+TkPortMenu:
     tearoff: 1
 
-[TkMenuLineVisible]
+TkMenuLineVisible:
     tearoff: 1
 
-[ContainerPack]
+ContainerPack:
     side: top
     fill: both
     expand: True
 
-[ContainerGridRow]
+ContainerGridRow:
     index: 0
     weight: 1
 
-[ContainerGridColumn]
+ContainerGridColumn:
     index: 0
     weight: 1
 
-[MenuBar1]
+MenuBar1:
     tearoff: 1
     label: Exit
     command: quit
     menu: menu_file
 
-[MenuBar2]
+MenuBar2:
     tearoff: 1
     label: File...
     command:
     menu: menu_file
 
-[LineVisibleMenu]
-
-    labell: 'Line1'
+LineVisibleMenu:
+    labell: Line1
     command1:
 
-    label2: 'Line2'
+    label2: Line2
     command2:
 
-    label3: 'Line3'
+    label3: Line3
     command3:
 
-    label4: 'Line4'
+    label4: Line4
     command4:
 
-    label5: 'Line5'
+    label5: Line5
     command5:
 
 
-[LineColorMenu]
-    labell: 'Line1'
-    label2: 'Line2'
-    label3: 'Line3'
-    label4: 'Line4'
-    label5: 'Line5'
+LineColorMenu:
+    labell: Line1
+    label2: Line2
+    label3: Line3
+    label4: Line4
+    label5: Line5
 
     menu:
 
-[AuthorMenu]
-    tearoff: 0:
+AuthorMenu:
+    tearoff: 0
     label: Info
     command:
 
-[AuthorMenuCascade]
-    label: 'O autorze'
+AuthorMenuCascade:
+    label: O autorze
     menu:

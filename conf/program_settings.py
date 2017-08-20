@@ -2,15 +2,19 @@
 Global settings for entire program
 """
 
+import os
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib import style
-from SerialApp.utils.import_settings import get_section_or_param
 
-# SERIAL_PORT_SETTINGS = get_section_or_param('[SERIAL_PORT] settings.ini', 'SerialPort')
-# SERIAL_PORT_BYTESIZE = get_section_or_param('[SERIAL_PORT] settings.ini', 'SerialPort', 'baudrate')
+from SerialApp.program_paths import FOLDER_CONF_YML
+from SerialApp.utils.get_yaml_config import get_section_or_param
+
+
+filename_settings_serial = os.path.join(FOLDER_CONF_YML, 'settings_serial_port.yaml')
+SERIAL_PORT_SETTINGS = get_section_or_param(filename_settings_serial, 'SerialPort')
+
 # print(SERIAL_PORT_SETTINGS)
-# print(SERIAL_PORT_BYTESIZE)
 # MENU_SETTINGS = get_settings('[SETTINGS_MENU] menu.ini', 'MainWindow', 'iconbitmap')
 
 matplotlib.use('TkAgg')

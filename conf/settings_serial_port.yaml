@@ -1,4 +1,4 @@
-[SerialPort]
+SerialPort:
     port: 6
     baudrate: 9600
     bytesize: EIGHTBITS

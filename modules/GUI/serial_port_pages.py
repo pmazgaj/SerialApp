@@ -2,10 +2,9 @@
 Define all pages for the Serial Port Handling.
 """
 import tkinter as tk
-import os
 from tkinter import ttk
-from SerialApp.program_paths import FOLDER_ASSETS_ICONS
-from SerialApp.settings_files.program_settings import LARGE_FONT
+
+from SerialApp.conf.program_settings import LARGE_FONT
 from .pages import StartPage
 
 
